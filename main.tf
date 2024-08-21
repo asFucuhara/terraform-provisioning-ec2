@@ -2,15 +2,6 @@ provider "aws" {
   region = "us-east-1"
 }
 
-variable vpc_cidr_blocks {}
-variable subnet_cidr_blocks {}
-variable avail_zone {}
-variable env_prefix {}
-variable my_ip {}
-variable instance_type {}
-variable public_key_location {}
-
-
 resource "aws_vpc" "myapp-vpc" {
   cidr_block = var.vpc_cidr_blocks
   tags = {
@@ -109,10 +100,6 @@ data "aws_ami" "latest-amazon-linux-name" {
     name = "virtualization-type"
     values = ["hvm"]
   }
-}
-
-output ec2_public_ip {
-  value = aws_instance.myapp-server.public_ip
 }
 
 resource "aws_key_pair" "ssh-key" {
